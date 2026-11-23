@@ -1,0 +1,29 @@
+@model IEnumerable<TP1.Models.Movie>
+
+<h1>Movies</h1>
+
+<p>
+    <a asp-action="Create">Add a movie</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Genre</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Name</td>
+                <td>@(movie.Genre?.Name ?? "Unknown")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@movie.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

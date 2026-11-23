@@ -1,0 +1,32 @@
+@model TP1.Models.Movie
+
+<h1>Add a movie</h1>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <div>
+        <label for="Name">Movie name</label>
+        <input id="Name" name="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label for="GenreId">Genre</label>
+        <select id="GenreId" name="GenreId">
+            <option value="">-- Select a genre --</option>
+            @foreach (var genre in ViewBag.Genres)
+            {
+                <option value="@genre.Value">@genre.Text</option>
+            }
+        </select>
+        <span asp-validation-for="GenreId"></span>
+    </div>
+
+    <button type="submit">Save movie</button>
+</form>
+
+<a asp-action="Index">Back to movies</a>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
