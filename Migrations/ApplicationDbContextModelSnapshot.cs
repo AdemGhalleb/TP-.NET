@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TP1.Models;
+using TP1.Data;
 
 #nullable disable
 
@@ -16,7 +16,7 @@ namespace TP1.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.13");
 
-            modelBuilder.Entity("Genre", b =>
+            modelBuilder.Entity("TP1.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,32 +29,18 @@ namespace TP1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Action"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Drame"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Comédie"
-                        });
                 });
 
-            modelBuilder.Entity("Movie", b =>
+            modelBuilder.Entity("TP1.Models.Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("GenreId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsAvailable")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -68,9 +54,9 @@ namespace TP1.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("Movie", b =>
+            modelBuilder.Entity("TP1.Models.Movie", b =>
                 {
-                    b.HasOne("Genre", "Genre")
+                    b.HasOne("TP1.Models.Genre", "Genre")
                         .WithMany("Movies")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -79,7 +65,7 @@ namespace TP1.Migrations
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("Genre", b =>
+            modelBuilder.Entity("TP1.Models.Genre", b =>
                 {
                     b.Navigation("Movies");
                 });

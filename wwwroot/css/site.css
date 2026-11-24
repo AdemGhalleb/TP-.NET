@@ -29,3 +29,9 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.rating-stars {
+  font-size: 1.1rem;
+  letter-spacing: 0.08rem;
+  white-space: nowrap;
+}

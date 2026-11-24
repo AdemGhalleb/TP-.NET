@@ -3,16 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TP1.Models;
+using TP1.Data;
+using TP1.Services;
 
 namespace TP1.Controllers
 {
     public class MoviesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ReviewService _reviewService;
 
-        public MoviesController(ApplicationDbContext context)
+        public MoviesController(ApplicationDbContext context, ReviewService reviewService)
         {
             _context = context;
+            _reviewService = reviewService;
         }
 
         // GET: /Movies
@@ -42,7 +46,13 @@ namespace TP1.Controllers
                 return NotFound();
             }
 
-            return View(movie);
+            var reviews = await _reviewService.GetByMovieIdAsync(movie.Id);
+
+            return View(new MovieDetailsViewModel
+            {
+                Movie = movie,
+                Reviews = reviews
+            });
         }
 
         // GET: /Movies/Create

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TP1.Models;
 using TP1.Migrations;
+using TP1.Data;
 
 public class GenreController : Controller
 {
